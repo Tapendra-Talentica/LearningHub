@@ -1,7 +1,7 @@
 // Question
 // "https://leetcode.com/problems/remove-outermost-parentheses/description/"
 
-const removeOuterMostParantese=(inp)=>{
+const removeOuterMostarentheses=(inp)=>{
     let res=""
     let cnt=0
     if(inp.length<1) return res
@@ -25,7 +25,7 @@ const removeOuterMostParantese=(inp)=>{
 }
 
 const inp="(()())(())(()(()))"
-const out=removeOuterMostParantese(inp)
+const out=removeOuterMostarentheses(inp)
 console.log("Output: ",out)
 
 
