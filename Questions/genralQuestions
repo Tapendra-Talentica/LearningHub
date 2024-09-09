@@ -1,0 +1,29 @@
+Q1. Call vs Apply vs Bind and demo of it
+Q2. Map vs Filter 
+Q3. Function currying example  
+Q4. Event loop 
+Q5. Libraries in node js  
+Q6. What is middleware? Name any. 
+Q7. What are closures in JavaScript?  
+Q8. Write the definition for this function add(4)(5)(1)(); 
+Q9. const sum = (a,b) => a+b; make it typed  
+Q10.    How do you solve Sum (3)(4)(2) in JavaScript and explain the steps? 
+Q11.    Write a debounce function 
+Q12.    Write function to print the nested properties of an object.
+Q13.    Need and purpose of NestJs? 
+Q14.    Server-side rendering? 
+Q15.    How to do rendering in NestJs? 
+Q16.    What is an event loop? 
+Q17.    What is the difference between asynchronous and synchronous tasks? 
+Q18.    What is the purpose of the package.json file? 
+Q19.    How do you handle errors in NodeJS? 
+Q20.    How does node handle garbage collection and what is old space and new space? 
+Q21.    What are some common debugging techniques in Node.js? 
+Q22.    What are the use cases of docker and debugging in container   
+Q23.    Create a server and a route using HTTP module 
+Q24.    Write an error handling middleware and use it in the created server. 
+Q25.    Implement caching in the created server 
+Q26.    How to handle file uploading in node using FS 
+Q27.    Read data from file line by line without loading the entire file into memory 
+Q28.    Write code to handle events emitting 
+Q29.    How to optimize if a database query is slow 
