@@ -4,7 +4,7 @@ it to handle many concurrent connections efficiently
 using a single thread. However, Node.js can also perform
 multithreading when needed, especially for CPU-intensive tasks.
 
-1. Nodejs user a single threaded to execute JavaScript code.It handle
+1. Nodejs use a single threaded to execute JavaScript code.It handle
     all incoming request and I/O operation
 2. It is a non blocking means it can handle multiple task at the same time
     by using event loop

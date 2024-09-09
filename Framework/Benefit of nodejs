@@ -7,7 +7,7 @@ Key benefit of nodejs
 
 4. Large Ecosystem and Community support: It has a huge number of libraries and tool available through npm
 
-5. Scalability: It can scal efficiently ,good for the application that need to grow over time
+5. Scalability: It can scale efficiently ,good for the application that need to grow over time
 
 6. Real Time App: bacause of its fast and non-blocking nature it is  good for those application which require real time communication,like game or chat app
 
