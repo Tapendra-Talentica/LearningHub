@@ -46,3 +46,24 @@ Best Practise for error handling in Nodejs
 4. Graceful Shutdown::  In case of a critical error, perform a graceful shutdown, freeing up resources like database connections, file handles, etc.
 5. Centralize Error Handling: For larger applications, centralize error handling in middleware or utility functions to avoid repetitive code.
 6. Avoid Leaking Sensitive Information: Do not expose sensitive information to end users
+
+* Global Level Error Handling
+It prevent your app from crashing due to unexpected errors
+
+I. Types of Errors:
+
+Synchronous Errors: Errors that happen immediately when the code is executed (e.g., throw new Error("Something went wrong!")).
+Asynchronous Errors: Errors that occur in callbacks or async operations (e.g., a failed database query).
+
+II. Handling Uncaught Exceptions:
+
+Use process.on('uncaughtException', (err) => { ... }) to handle errors not caught by other means. This approach prevents the app from crashing but should be used carefully, as it could lead to an unstable state.
+
+III. Promise Rejections:
+
+Use process.on('unhandledRejection', (reason, promise) => { ... }) to handle unhandled promise rejections. This is important in a Node.js app using Promises or async/await to handle async operations.
+
+IV. Best Practices:
+
+Use try/catch for synchronous code and Promise.catch() for async operations.
+Prefer more localized error handling rather than relying solely on global handlers, as it makes debugging easier.
