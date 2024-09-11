@@ -9,4 +9,4 @@ Event Stack (Call Stack): Keeps track of currently executing functions. When the
 
 Event Loop: The mechanism that checks the stack and the queue and processes them in order. It ensures asynchronous operations do not block the main thread, allowing your application to stay responsive.
 
-EVENT LOOP :
+
