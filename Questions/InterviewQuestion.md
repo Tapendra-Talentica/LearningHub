@@ -398,3 +398,203 @@ myEmitter.emit('event');
 - **Pagination**: Implement pagination to reduce data load.
 
 Feel free to ask for further clarification or details on any specific topic!
+
+
+## More questions
+### Database Design for Flipkart-like Application
+
+**Tables:**
+
+1. **Users**
+   - `id` (Primary Key)
+   - `name`
+   - `email`
+   - `password`
+   - `address`
+
+2. **Products**
+   - `id` (Primary Key)
+   - `name`
+   - `description`
+   - `price`
+   - `stock_quantity`
+
+3. **Carts**
+   - `id` (Primary Key)
+   - `user_id` (Foreign Key references Users)
+   - `status` (active/ordered)
+
+4. **CartItems**
+   - `id` (Primary Key)
+   - `cart_id` (Foreign Key references Carts)
+   - `product_id` (Foreign Key references Products)
+   - `quantity`
+
+5. **Orders**
+   - `id` (Primary Key)
+   - `user_id` (Foreign Key references Users)
+   - `cart_id` (Foreign Key references Carts)
+   - `total_price`
+   - `status` (pending/confirmed/shipped/delivered)
+   - `order_date`
+
+**Relationships:**
+- One `User` can have many `Carts`.
+- One `Cart` can have many `CartItems`.
+- Each `CartItem` corresponds to one `Product`.
+- One `Cart` can become an `Order`.
+
+---
+
+### Adding Second Product to Cart
+
+- Check if an active cart exists for the user. If not, create one.
+- Add the product to the `CartItems` table with the respective `cart_id` and `product_id`.
+
+```sql
+INSERT INTO CartItems (cart_id, product_id, quantity)
+VALUES (active_cart_id, second_product_id, quantity);
+```
+
+---
+
+### Adding New Product After Placing Order
+
+- Place the order by setting the cart’s status to "ordered" and creating an order entry.
+- Once an order is placed, create a new active cart for the user to add new products.
+
+---
+
+### API to View Cart
+
+**Input:**
+- User ID (`user_id`)
+
+**SQL Query:**
+
+```sql
+SELECT Products.id, Products.name, Products.price, CartItems.quantity
+FROM CartItems
+JOIN Products ON CartItems.product_id = Products.id
+JOIN Carts ON CartItems.cart_id = Carts.id
+WHERE Carts.user_id = user_id AND Carts.status = 'active';
+```
+
+---
+
+### `import` vs `require`
+
+- **`require`:** CommonJS module system used in Node.js. Synchronous and works in all Node.js versions.
+- **`import`:** ES6 module system, mostly used in modern JavaScript. It is asynchronous and works natively in newer versions of Node.js or with Babel transpilation.
+
+---
+
+### Middlewares
+
+Middlewares are functions in Express.js that have access to the `req`, `res`, and `next` objects. They can modify the request and response or terminate the request-response cycle. Examples include authentication, logging, and parsing request bodies.
+
+---
+
+### Callback Hell
+
+Callback hell refers to deeply nested callbacks, which makes the code difficult to read and maintain. It often occurs when dealing with asynchronous code in JavaScript.
+
+Example:
+```javascript
+asyncFunction1((err, result1) => {
+  asyncFunction2(result1, (err, result2) => {
+    asyncFunction3(result2, (err, result3) => {
+      // More nested callbacks...
+    });
+  });
+});
+```
+
+---
+
+### Promises
+
+Promises represent an eventual completion or failure of an asynchronous operation and its resulting value.
+
+Example:
+```javascript
+let promise = new Promise((resolve, reject) => {
+  // async operation
+  if(success) resolve(result);
+  else reject(error);
+});
+```
+
+---
+
+### Async/Await
+
+`async/await` is syntactic sugar for working with Promises, providing cleaner and more readable asynchronous code.
+
+Example:
+```javascript
+async function fetchData() {
+  try {
+    let data = await fetchAPI();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+```
+
+---
+
+### Promise.all
+
+`Promise.all` takes an array of Promises and resolves when all promises are resolved. It returns an array of results. If any promise fails, `Promise.all` will reject.
+
+Example:
+```javascript
+Promise.all([promise1, promise2, promise3])
+  .then(results => {
+    console.log(results);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+```
+
+---
+
+### Running 5 Promises in Parallel, Moving Forward When Any 2 Resolve
+
+You can use `Promise.race()` in combination with tracking the resolved promises:
+
+```javascript
+async function runInParallel(promises) {
+  let resolvedPromises = [];
+  
+  while (resolvedPromises.length < 2) {
+    const result = await Promise.race(promises);
+    resolvedPromises.push(result);
+    promises = promises.filter(p => p !== result); // Remove resolved promise
+  }
+  
+  // Continue processing after two promises are resolved
+}
+```
+
+---
+
+### Tracing a Bug in Production
+
+To trace a bug in production, I typically use logging and monitoring tools (e.g., AWS CloudWatch, Sentry) to track errors. For example, in a food delivery system, we encountered a bug where the order status was not updated correctly. By logging the order status changes and checking the logs, we traced the issue to a missing database update in a certain flow of the code.
+
+---
+
+### MVC Structure in Express
+
+- **Model:** Represents the data (e.g., database interaction).
+- **View:** Represents the user interface (e.g., templates or frontend code).
+- **Controller:** Handles the logic and responds to user input (e.g., routes and request handling).
+
+Example:
+- **Model:** Defines the schema for users or products in the database.
+- **View:** Renders the product page with data from the controller.
+- **Controller:** Receives a request to view a product, fetches the data, and passes it to the view for rendering.
