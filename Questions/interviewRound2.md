@@ -198,7 +198,7 @@ class Task {
   name: string;
   dueDate: Date;
   isCompleted: boolean;
-  tags: Array<string>;
+  tags: string[];
   subTasks: SubTask[];
 
   constructor(name: string, dueDate: string) {
